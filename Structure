@@ -1,0 +1,27 @@
+AI-Multimodal-Health-Assistant/
+│
+├── data/
+│   ├── text/              # Medical chats (MedDialog, synthetic)
+│   ├── audio/             # RAVDESS / CREMA-D
+│   ├── video/             # Fall detection datasets
+│   ├── reports/           # CSV (UCI, MIMIC, etc.)
+│
+├── notebooks/
+│   ├── preprocessing.ipynb
+│   ├── multimodal_training.ipynb
+│   ├── evaluation.ipynb
+│
+├── models/
+│   ├── text_model/
+│   ├── audio_model/
+│   ├── video_model/
+│   ├── fusion_model/
+│
+├── app/
+│   ├── static/
+│   ├── templates/
+│   ├── app.py             # Flask front-end
+│
+├── requirements.txt
+├── README.md
+└── architecture_diagram.png
