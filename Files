@@ -1,0 +1,12 @@
+AI-Multimodal-Health-Assistant/
+│
+├── data/
+├── models/
+├── notebooks/
+├── app/
+│   ├── templates/
+│   ├── static/
+│   └── app.py
+├── requirements.txt
+├── README.md
+└── architecture_diagram.png
