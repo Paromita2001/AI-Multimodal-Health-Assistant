@@ -1,27 +1,67 @@
-AI-Multimodal-Health-Assistant/
+elderly-health-monitor/
 │
-├── data/
-│   ├── text/              # Medical chats (MedDialog, synthetic)
-│   ├── audio/             # RAVDESS / CREMA-D
-│   ├── video/             # Fall detection datasets
-│   ├── reports/           # CSV (UCI, MIMIC, etc.)
+├── README.md                          # Project documentation
+├── requirements.txt                   # Python dependencies
+├── .env                               # Environment variables (API keys, etc.)
+├── .gitignore                         # Git ignore file
+├── config.py                          # Configuration settings
 │
-├── notebooks/
-│   ├── preprocessing.ipynb
-│   ├── multimodal_training.ipynb
-│   ├── evaluation.ipynb
+├── app.py                             #  FastAPI main backend
+├── ui.py                              #  Gradio simple UI
 │
-├── models/
-│   ├── text_model/
-│   ├── audio_model/
-│   ├── video_model/
-│   ├── fusion_model/
+├── src/
+│   │
+│   ├── pipelines/                     #  AI Processing Pipelines
+│   │   ├── __init__.py
+│   │   ├── fall_pipeline.py           # Fall detection logic
+│   │   ├── audio_pipeline.py          # STT + symptom detection
+│   │   ├── report_pipeline.py         # OCR + report extraction
+│   │   ├── vitals_pipeline.py         # Check HR/BP/SPO2
+│   │   └── fusion.py                  # Combine all results
+│   │
+│   ├── models/                        #  ML Models (lightweight)
+│   │   ├── __init__.py
+│   │   ├── vision_model.py            # Mediapipe fall detection
+│   │   ├── whisper_model.py           # Whisper tiny STT
+│   │   ├── ocr_model.py               # PaddleOCR
+│   │   └── llm_model.py               # Medical LLM reasoning
+│   │
+│   ├── threads/                       #  CPU Threads (lightweight)
+│   │   ├── __init__.py
+│   │   ├── fall_thread.py             # Runs every 3 seconds
+│   │   ├── audio_thread.py            # Event-driven (on voice)
+│   │   ├── vitals_thread.py           # Runs every 60 seconds
+│   │   └── llm_thread.py              # Triggered when needed
+│   │
+│   ├── utils/                         #  Helper Tools
+│   │   ├── __init__.py
+│   │   ├── notifier.py                # Send SMS/Email/WhatsApp
+│   │   ├── logger.py                  # Custom logging
+│   │   └── preprocess.py              # Data cleaning helpers
+│   │
+│   └── db/                            #  Database Layer
+│       ├── __init__.py
+│       ├── db.py                      # Database connection
+│       └── models.py                  # User data models
 │
-├── app/
-│   ├── static/
-│   ├── templates/
-│   ├── app.py             # Flask front-end
+├── data/                              #  Local Data Storage
+│   ├── reports/                       # Medical reports (images/PDFs)
+│   ├── audio/                         # Voice recordings
+│   ├── video/                         # Video frames
+│   └── vitals/                        # Vitals logs (CSV/JSON)
 │
-├── requirements.txt
-├── README.md
-└── architecture_diagram.png
+├── models_cache/                      #  Downloaded ML Models
+│   ├── whisper/                       # Whisper model files
+│   ├── mediapipe/                     # Mediapipe pose files
+│   └── ocr/                           # PaddleOCR files
+│
+├── tests/                             #  Unit Tests
+│   ├── __init__.py
+│   ├── test_fall_detection.py
+│   ├── test_audio_pipeline.py
+│   └── test_ocr.py
+│
+└── scripts/                           #  Utility Scripts
+    ├── download_models.py             # Download all models
+    ├── setup_db.py                    # Initialize database
+    └── test_system.py                 # Quick system test
